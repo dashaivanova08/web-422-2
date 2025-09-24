@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CUEFA</title>
+
+    <link rel="stylesheet" href="cuefa.css">
+
+</head>
+<body>
+    <h1>Камень, ножницы, бумага ✊✌️✋</h1>
+    <div class="choices"> 
+        <button onclick="play('камень')">✊ Камень</button> 
+        <button onclick="play('ножницы')">✌️ Ножницы</button>
+        <button onclick="play('бумага')">✋ Бумага</button>
+    </div>
+    <div class="selection" id="selection" style="display: none;">
+        <!-- Контейнер для отображения выборов в президенты ой -->
+        <div class="player">
+            <div class="choice-icon" id="playerIcon">❔</div>
+            <div class="label">Ты выбрал</div>
+        </div>
+        <div class="computer">
+            <div class="choice-icon" id="computerIcon">❔</div>
+            <div class="label">Железяка выбрала</div>
+        </div>
+    </div>
+    <div class="result" id="result">Сделай свой выбор!</div> 
+    <div class="stats">
+        <!-- Область для отображения результата -->
+        <h3>Статистика:</h3>
+        <p>Победы: <span id="wins">0</span></p>
+        <p>Поражения: <span id="losses">0</span></p>
+        <p>Ничьи: <span id="draws">0</span></p>
+        <p>Камень: <span id="stoneCount">0</span></p>
+        <p>Ножницы: <span id="scissorsCount">0</span></p>
+        <p>Бумага: <span id="paperCount">0</span></p>
+    </div>
+
+<script>
+    //Переменные для статы
+    let wins = 0;
+    let losses = 0;
+    let draws = 0;
+    let stoneCount = 0;
+    let scissorsCount = 0;
+    let paperCount = 0;
+
+    //емодзиии
+    const icons = {
+        'камень': '✊',
+        'ножницы': '✌️',
+        'бумага': '✋'
+    };
+
+function play(playerChoice) { 
+    // Подсчет выбора игрока
+    switch(playerChoice) {
+    case 'камень': stoneCount++; break;
+    case 'ножницы': scissorsCount++; break;
+    case 'бумага': paperCount++; break;
+    }
+    
+    const computerChoice = ['камень', 'ножницы', 'бумага'][Math.floor(Math.random() * 3)];// Генерация случайного выбора компьютера
+    
+    // Обновление иконок выбора
+    document.getElementById('playerIcon').textContent = icons[playerChoice];
+    document.getElementById('computerIcon').textContent = icons[computerChoice];
+   
+    document.getElementById('selection').style.display = 'flex'; // Показ контейнера с выборами (до этого его не было ха)
+    
+    let result = 'Ты проиграл 😢'; // то есть если ниче, то ты лусер
+    if (playerChoice === computerChoice) {
+        result = 'Ничья!';
+        draws++; // увеличиввает на 1 кол-во ничьих
+    } else if (
+        (playerChoice === 'камень' && computerChoice === 'ножницы') || // ЭТО ИЛИ
+        (playerChoice === 'ножницы' && computerChoice === 'бумага') ||
+        (playerChoice === 'бумага' && computerChoice === 'камень')
+    ) {
+        result = 'Ты выиграл! 🎉'; // увеличиввает на 1 кол-во побед
+        wins++;
+    } else {
+        losses++; // увеличиввает на 1 кол-во поражений
+    }
+    document.getElementById('result').innerHTML = result; // поиск эл-та по его ид и присвоение нового результата
+    document.getElementById('wins').textContent = wins;
+    document.getElementById('losses').textContent = losses;
+    document.getElementById('draws').textContent = draws;
+    document.getElementById('stoneCount').textContent = stoneCount;
+    document.getElementById('scissorsCount').textContent = scissorsCount;
+    document.getElementById('paperCount').textContent = paperCount;
+}
+</script>
+</body>
+</html>

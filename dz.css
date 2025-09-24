@@ -1,0 +1,23 @@
+body {
+    font-family: Arial;
+    text-align: center;
+    margin-top: 100px;
+}
+button {
+    padding: 10px 20px;
+    margin: 5px;
+    background-color: #f01c6a;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: box-shadow 0.3s, transform 0.3s;
+    margin: 0 15px;
+}
+
+button:hover {
+    background-color: #b9104e;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+    transform: translateY(-2px);
+}

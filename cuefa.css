@@ -1,0 +1,34 @@
+body {
+    font-family: sans-serif;
+    text-align: center;
+    background: #f0f0f0;
+    margin-top: 50px; /* отступ сверху*/
+}
+.choices button {
+    font-size: 20px;
+    padding: 10px 20px;
+    margin: 10px;
+    border: none;
+    background: #f01c6a;
+    color: white;
+    cursor: pointer; 
+    border-radius: 5px;
+}
+.choices button:hover {
+    background: #b9104e;
+}
+
+.selection { /* стиль для эмодзи */
+    display: flex; /* Flex-контейнер для выравнивания элементов (хз че он делает, но звучит хайпово) */
+    justify-content: center; 
+    gap: 60px; /* Расстояние между элементами */
+    margin-top: 20px; 
+}
+.choice-icon {
+    font-size: 50px;
+}
+.result {
+    margin-top: 30px;
+    font-size: 22px;
+    font-weight: bold;
+}

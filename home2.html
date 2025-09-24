@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Конвертер систем счисления</title>
+    <style>
+        body {
+            font-family: Arial;
+        }
+        .converter {
+            max-width: 400px;
+            margin: auto;
+        }
+        input {
+            width: 55%; /* делает ширину поля ввода равной 100% */
+            padding: 10px; /* добавляет внутренние отступы по 10 пикселей со всех сторон */
+            margin: 5px 0; /* добавляет внешний отступ сверху и снизу по 5 пикселей */
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            margin-top: 10px;
+            background: #f01c6a;
+            border: none;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .button:hover {
+            background: #790b33;
+        }
+    </style>
+</head>
+<body>
+    <div class="converter">
+        <h2>Конвертер двоичных и шестнадцатеричных чисел</h2>
+        
+        <div>
+            <h3>Двоичное в шестнадцатеричное:</h3>
+            <input type="text" id="binInput" placeholder="Введите двоичное число">
+            <button onclick="binToHex()" class="button">Конвертировать</button>
+            <div id="hexResult"></div>
+        </div>
+        
+        <div>
+            <h3>Шестнадцатеричное в двоичное:</h3>
+            <input type="text" id="hexInput" placeholder="Введите шестнадцатеричное число">
+            <button onclick="hexToBin()" class="button">Конвертировать</button>
+            <div id="binResult"></div>
+        </div>
+    </div>
+
+    <script>
+        // Функция конвертации из двоичной в шестнадцатеричную
+        function binToHex() {
+            const bin = document.getElementById('binInput').value;
+            
+            // Проверка корректности ввода
+            if (!/^[01]+$/.test(bin)) {
+                alert('Введите корректное двоичное число!'); // модальное окно
+                return;
+            }
+            
+            // Конвертация
+            const hex = parseInt(bin, 2).toString(16).toUpperCase();
+            document.getElementById('hexResult').innerText = `Результат: ${hex}`;
+        }
+
+        // Функция конвертации из шестнадцатеричной в двоичную
+        function hexToBin() {
+            const hex = document.getElementById('hexInput').value.toUpperCase();
+            
+            // Проверка корректности ввода
+            if (!/^[0-9A-F]+$/.test(hex)) {
+                alert('Введите корректное шестнадцатеричное число!');
+                return;
+            }
+            
+            // Конвертация
+            const bin = parseInt(hex, 16).toString(2);
+            document.getElementById('binResult').innerText = `Результат: ${bin}`;
+        }
+    </script>
+</body>
+</html>
