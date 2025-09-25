@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ivanova</title>
+</head>
+<body>
+    
+    
+    <form> 
+        <label for="name">Пицца</label> <br/>
+        <input type="text" placeholder="Пицца" 
+        id="name"> <br/>
+
+        <button id="add" onclick="add()" type="button">Добавить</button>
+    </form>
+    
+    <div>
+        <p> Заказы</p>
+        <ul>
+            <li>Три сезона <input type="checkbox"></li>
+            <li>Четыре сезона <input type="checkbox"></li>
+        </ul>
+    </div>
+
+    <script>
+        //console.log('hello')
+
+        let nameInput = document.getElementById('name');
+
+        function add() {
+            console.log(nameInput.value)
+        }
+    </script>
+
+</body>
+</html>
