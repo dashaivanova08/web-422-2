@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ivanova</title>
+    <style>
+        body {
+            font-family: Arial;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 10px;
+        }
+        
+        input[type="text"] {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        input[type="text"]:focus {
+            outline: none; /* Убираем стандартное выделение */
+            box-shadow: 0 0 1px 2px #e11947;
+        }
+        
+        button {
+            padding: 10px 20px;
+            background: #e11947;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        button:hover {
+            background: #b91138;
+        }
+        
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        input[type="checkbox"] {
+            accent-color: #e11947; 
+            margin-right: 10px;
+        }
+
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+        }
+        
+        li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Меню пиццы</h1>
+        </div>
+        
+        <div class="input-group">
+            <input type="text" id="pizzaName" placeholder="Введите название пиццы">
+            <button onclick="addPizza()">Добавить</button>
+        </div>
+        <div>
+           <p> Заказы:</p>
+            <ul id="pizzaList">
+                <!-- Список пицц будет здесь -->
+            </ul> 
+            <button onclick="confirmOrder()">Оформить заказ</button>
+        </div>
+    </div>
+
+    <script>
+        function addPizza() { // Функция для добавления пиццы
+            const input = document.getElementById('pizzaName'); // Получаем поле ввода по ID
+            const pizzaName = input.value.trim(); // Получаем значение поля и убираем пробелы
+            
+            if (pizzaName === '') return; // Если поле пустое, выходим из функции
+            
+            const list = document.getElementById('pizzaList'); // Получаем список пицц
+            const li = document.createElement('li'); // Создаем новый элемент списка
+            
+            const checkbox = document.createElement('input'); // Создаем чекбокс
+            checkbox.type = 'checkbox'; // Устанавливаем тип элемента как checkbox
+            
+            const label = document.createElement('label'); // Создаем метку для названия пиццы
+            label.textContent = pizzaName; // Устанавливаем текст метки как введенное название
+            
+            li.appendChild(checkbox); // Добавляем чекбокс в элемент списка
+            li.appendChild(label); // Добавляем метку в элемент списка
+            
+            list.appendChild(li); // Добавляем элемент списка в общий список
+            
+            input.value = ''; // Очищаем поле ввода после добавления
+        }
+        function confirmOrder() {
+            const list = document.getElementById('pizzaList');
+            const selectedPizzas = []; // пустой массив для хранения выбр. пицц
+
+            // Собираем все выбранные пиццы
+            const checkboxes = list.querySelectorAll('input[type="checkbox"]:checked'); // находит все выбранные чекбоксы
+            checkboxes.forEach(checkbox => {
+                const label = checkbox.nextElementSibling; // Получаем следующий элемент после чекбокса (это будет label с названием пиццы)
+                selectedPizzas.push(label.textContent); // Добавляем текст из label в массив selectedPizzas
+            });
+
+            if (selectedPizzas.length === 0) {
+                alert('Пожалуйста, выберите хотя бы одну пиццу!');
+            return;
+            }
+ 
+             // Формируем сообщение с выбранным списком
+            const message = 'Заказ оформлен, ожидайте!\n\nВы заказали:\n' + // \n создает новую строку
+            selectedPizzas.join('\n');// // join('\n') соединяет все элементы массива в одну строку, разделяя их переносами
+             
+ 
+            alert(message); // Показываем финальное сообщение с заказом
+
+            list.innerHTML = '';// Очищаем список
+        }
+
+    </script>
+</body>
+</html>
